@@ -12,67 +12,75 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
-@Entity
-@Table(name = "Program")
-public class Program {
-	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
-	@Column(name = "programId")
-	private int programId;
 
-	@Column(name = "startDate")
-	private LocalDate startDate;
+	@Entity
+	@Table(name = "Program")
+	public class Program {
+		@Id
+		@GeneratedValue(strategy = GenerationType.TABLE) 
+		@Column(name = "programId")
+		private int programId;
 
-	@Column(name = "endDate")
-	private LocalDate endDate;
-	
-	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	@JoinColumn(name="Course_id")
-	private Course course;
+		@Column(name = "startDate")
+		private LocalDate startDate;
 
-	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	@JoinColumn(name="faculty_id")
-	private Employee faculty;
+		@Column(name = "endDate")
+		private LocalDate endDate;
+		
+		@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+		@JoinColumn(name="programId" ,referencedColumnName = "programId")
+		private Course course;
 
-	public int getProgramId() {
-		return programId;
+		@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+		@JoinColumn(name="faculty_id")
+	  @Transient
+		private Trainer faculty;
+
+		public int getProgramId() {
+			return programId;
+		}
+
+		public void setProgramId(int programId) {
+			this.programId = programId;
+		}
+
+		public LocalDate getStartDate() {
+			return startDate;
+		}
+
+		public void setStartDate(LocalDate startDate) {
+			this.startDate = startDate;
+		}
+
+		public LocalDate getEndDate() {
+			return endDate;
+		}
+
+		public void setEndDate(LocalDate endDate) {
+			this.endDate = endDate;
+		}
+
+		public Course getCourse() {
+			return course;
+		}
+
+		public void setCourse(Course course) {
+			this.course = course;
+		}
+
+		/*public Employee getFaculty() {
+			return faculty;
+		}
+*/
+		public void setFaculty(Trainer faculty) {
+			this.faculty = faculty;
+		}
+
+		@Override
+		public String toString() {
+			return "Program [programId=" + programId + ", startDate=" + startDate + ", endDate=" + endDate + ", course="
+					+ course + ", faculty=" + faculty + "]";
+		}
 	}
-
-	public void setProgramId(int programId) {
-		this.programId = programId;
-	}
-
-	public LocalDate getStartDate() {
-		return startDate;
-	}
-
-	public void setStartDate(LocalDate startDate) {
-		this.startDate = startDate;
-	}
-
-	public LocalDate getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(LocalDate endDate) {
-		this.endDate = endDate;
-	}
-
-	public Course getCourse() {
-		return course;
-	}
-
-	public void setCourse(Course course) {
-		this.course = course;
-	}
-
-	public Employee getFaculty() {
-		return faculty;
-	}
-
-	public void setFaculty(Employee faculty) {
-		this.faculty = faculty;
-	}
-
-}
