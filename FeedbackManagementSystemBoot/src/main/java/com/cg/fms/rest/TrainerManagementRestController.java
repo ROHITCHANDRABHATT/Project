@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.fms.entity.Trainer;
 import com.cg.fms.exception.ElementNotFoundException;
-import com.cg.fms.exception.ValueInvalidException;
+import com.cg.fms.exception.InvalidValueException;
 import com.cg.fms.service.ITrainerManagementService;
 
 @RestController
@@ -28,35 +28,35 @@ public class TrainerManagementRestController {
 	
 	//URL: http://localhost:8880/trainer/add
 	@PostMapping(value = "/add", consumes = "application/json")
-	public Trainer add(@Valid @RequestBody Trainer trainer) throws ValueInvalidException,ElementNotFoundException {	
+	public Trainer add(@Valid @RequestBody Trainer trainer) throws InvalidValueException,ElementNotFoundException {	
 		
 		return service.addTrainer(trainer);
 	}
 	
 	//URL: http://localhost:8880/trainer/update
 	@PutMapping(value = "/update", consumes = "application/json")
-	public Trainer update(@Valid @RequestBody Trainer trainer) throws ValueInvalidException,ElementNotFoundException {
+	public Trainer update(@Valid @RequestBody Trainer trainer) throws InvalidValueException,ElementNotFoundException {
 		
 		return service.updateTrainer(trainer);
 	}
 	 
 	//URL: http://localhost:8880/trainer/delete
 	@DeleteMapping(value = "/delete", produces = "application/json")
-	public Trainer delete(@RequestParam("id") int trainerId) throws ValueInvalidException,ElementNotFoundException {
+	public Trainer delete(@RequestParam("id") int trainerId) throws InvalidValueException,ElementNotFoundException {
 		
 		return service.removeTrainer(trainerId);
 	}
 	
 	//URL: http://localhost:8880/trainer/view
 	@GetMapping(value = "/view", produces = "application/json")
-	public Trainer view(@RequestParam("id") int trainerId) throws ValueInvalidException, ElementNotFoundException {
+	public Trainer view(@RequestParam("id") int trainerId) throws InvalidValueException, ElementNotFoundException {
 		
 		return service.viewTrainer(trainerId);
 	}
 	
 	//URL: http://localhost:8880/trainer/viewBySkill
 	@GetMapping(value = "/viewBySkill", produces = "application/json")
-	public List<Trainer> viewBySkill(@RequestParam("skill") String skill) throws ValueInvalidException,ElementNotFoundException {
+	public List<Trainer> viewBySkill(@RequestParam("skill") String skill) throws InvalidValueException,ElementNotFoundException {
 		
 		return service.viewAllTrainers(skill);
 	}

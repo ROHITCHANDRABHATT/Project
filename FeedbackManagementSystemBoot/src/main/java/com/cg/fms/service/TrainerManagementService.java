@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cg.fms.entity.Trainer;
 import com.cg.fms.entity.Role;
 import com.cg.fms.exception.ElementNotFoundException;
-import com.cg.fms.exception.ValueInvalidException;
+import com.cg.fms.exception.InvalidValueException;
 import com.cg.fms.repository.ITrainerMangementRepository;
 import com.cg.fms.repository.ITrainingProgramRepository;
 
@@ -25,10 +25,10 @@ public class TrainerManagementService implements ITrainerManagementService{
 	
 	@Override
 	@Transactional 
-	public Trainer addTrainer(Trainer trainer) throws ValueInvalidException, ElementNotFoundException {
+	public Trainer addTrainer(Trainer trainer) throws InvalidValueException, ElementNotFoundException {
 		
 		if(!trainer.getRole().equals(Role.COORDINATOR))
-			throw new ValueInvalidException("Role must be COORDINATOR");
+			throw new InvalidValueException("Role must be COORDINATOR");
 		
 		if(trainer.getProgram()!=null)
 			prepo.findById(trainer.getProgram().getProgramId())
@@ -39,10 +39,10 @@ public class TrainerManagementService implements ITrainerManagementService{
 
 	@Override
 	@Transactional
-	public Trainer updateTrainer(Trainer trainer) throws ValueInvalidException, ElementNotFoundException {
+	public Trainer updateTrainer(Trainer trainer) throws InvalidValueException, ElementNotFoundException {
 		
 		if(trainer.getEmployeeId()<=0)
-			throw new ValueInvalidException("Trainer Id is invalid");
+			throw new InvalidValueException("Trainer Id is invalid");
 		
 		if(trainer.getProgram()!=null)
 			prepo.findById(trainer.getProgram().getProgramId())
@@ -56,10 +56,10 @@ public class TrainerManagementService implements ITrainerManagementService{
 
 	@Override
 	@Transactional
-	public Trainer removeTrainer(int trainerId) throws ValueInvalidException, ElementNotFoundException {
+	public Trainer removeTrainer(int trainerId) throws InvalidValueException, ElementNotFoundException {
 		
 		if(trainerId<=0)
-			throw new ValueInvalidException("Trainer ID is invalid");
+			throw new InvalidValueException("Trainer ID is invalid");
 		
 		Trainer emp = repo.findById(trainerId).orElseThrow(()->new ElementNotFoundException("Trainer doesn't exists"));
 		
@@ -68,19 +68,19 @@ public class TrainerManagementService implements ITrainerManagementService{
 	}
 
 	@Override
-	public Trainer viewTrainer(int trainerId) throws ValueInvalidException, ElementNotFoundException {
+	public Trainer viewTrainer(int trainerId) throws InvalidValueException, ElementNotFoundException {
 		
 		if(trainerId<=0)
-			throw new ValueInvalidException("Trainer ID is invalid");
+			throw new InvalidValueException("Trainer ID is invalid");
 		
 		return repo.findById(trainerId).orElseThrow(()->new ElementNotFoundException("Trainer Doesn't exists"));
 	}
  
 	@Override
-	public List<Trainer> viewAllTrainers(String skill) throws ValueInvalidException, ElementNotFoundException {
+	public List<Trainer> viewAllTrainers(String skill) throws InvalidValueException, ElementNotFoundException {
 		
 		if(skill.trim().isEmpty())
-			throw new ValueInvalidException("Skill is either null or Empty");
+			throw new InvalidValueException("Skill is either null or Empty");
 		
 		List<Trainer> trainers = repo.findBySkillIgnoreCase(skill);
 		

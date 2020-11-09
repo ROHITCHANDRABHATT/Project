@@ -21,7 +21,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.cg.fms.entity.Trainer;
 import com.cg.fms.entity.Role;
 import com.cg.fms.exception.ElementNotFoundException;
-import com.cg.fms.exception.ValueInvalidException;
+import com.cg.fms.exception.InvalidValueException;
 import com.cg.fms.rest.TrainerManagementRestController;
 import com.cg.fms.service.TrainerManagementService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -60,7 +60,7 @@ public class TestTrainerManagementRestController {
 		
 		Trainer employee = new Trainer(12,"Rohit","ABcd#456gh",Role.ADMIN,null,"JAVA");
 		
-		when(service.addTrainer(employee)).thenThrow(ValueInvalidException.class);
+		when(service.addTrainer(employee)).thenThrow(InvalidValueException.class);
 		
 		mvc.perform(post("/trainer/add")
 				.accept(MediaType.APPLICATION_JSON) 
@@ -89,7 +89,7 @@ public class TestTrainerManagementRestController {
 		
 		Trainer trainer = new Trainer(0,"Rohit","ABcd#456gh",Role.COORDINATOR,null,"JAVA");
 		
-		when(service.updateTrainer(trainer)).thenThrow(ValueInvalidException.class);
+		when(service.updateTrainer(trainer)).thenThrow(InvalidValueException.class);
 		
 		mvc.perform(put("/trainer/update")
 				.accept(MediaType.APPLICATION_JSON)
@@ -127,7 +127,7 @@ public class TestTrainerManagementRestController {
 	@Test
 	public void testDeleteTrainerInvalid() throws Exception {
 		
-		when(service.removeTrainer(0)).thenThrow(ValueInvalidException.class);
+		when(service.removeTrainer(0)).thenThrow(InvalidValueException.class);
 		
 		mvc.perform(delete("/trainer/delete?id=0"))
 				.andExpect(status().isNotAcceptable());
@@ -158,7 +158,7 @@ public class TestTrainerManagementRestController {
 	@Test
 	public void testViewTrainerInvalid() throws Exception {
 		
-		when(service.viewTrainer(0)).thenThrow(ValueInvalidException.class);
+		when(service.viewTrainer(0)).thenThrow(InvalidValueException.class);
 		
 		mvc.perform(get("/trainer/view?id=0"))
 				.andExpect(status().isNotAcceptable());

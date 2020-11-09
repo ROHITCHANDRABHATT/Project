@@ -16,7 +16,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.cg.fms.exception.ElementNotFoundException;
-import com.cg.fms.exception.ValueInvalidException;
+import com.cg.fms.exception.InvalidValueException;
 
 //@Order(Ordered.HIGHEST_PRECEDENCE)
 @ControllerAdvice
@@ -29,9 +29,9 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		return new ResponseEntity<Object>(ex.getMessage(), HttpStatus.NOT_FOUND);
 	}
 	
-	@ExceptionHandler(ValueInvalidException.class)
+	@ExceptionHandler(InvalidValueException.class)
 	@ResponseStatus(value = HttpStatus.NOT_ACCEPTABLE)
-	public ResponseEntity<Object> handleInvalidValueException(ValueInvalidException ex) {
+	public ResponseEntity<Object> handleInvalidValueException(InvalidValueException ex) {
 		return new ResponseEntity<Object>(ex.getMessage(), HttpStatus.NOT_ACCEPTABLE);
 	}
 	
