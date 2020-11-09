@@ -177,7 +177,7 @@ public class TestTrainerManagementRestController {
 	@Test
 	public void testViewBySkillPositive() throws Exception {
 		
-		Trainer trainer = new Trainer(0,"Rohit","ABcd#456gh",Role.COORDINATOR,null,"JAVA");
+		Trainer trainer = new Trainer(13,"Rohit","ABcd#456gh",Role.COORDINATOR,null,"JAVA");
 		List<Trainer> trainers = new ArrayList<>();
 		trainers.add(trainer);
 		
@@ -201,7 +201,7 @@ public class TestTrainerManagementRestController {
 	@Test
 	public void testViewAllTrainersPositive() throws Exception {
 		
-		Trainer trainer = new Trainer(0,"Rohit","ABcd#456gh",Role.COORDINATOR,null,"JAVA");
+		Trainer trainer = new Trainer(13,"Rohit","ABcd#456gh",Role.COORDINATOR,null,"JAVA");
 		List<Trainer> trainers = new ArrayList<>();
 		trainers.add(trainer);
 		
