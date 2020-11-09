@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -61,7 +62,6 @@ public class TestTrainerManagementRestController {
 		Trainer employee = new Trainer(12,"Rohit","ABcd#456gh",Role.ADMIN,null,"JAVA");
 		
 		when(service.addTrainer(employee)).thenThrow(InvalidValueException.class);
-		
 		mvc.perform(post("/trainer/add")
 				.accept(MediaType.APPLICATION_JSON) 
 				.content(mapper.writeValueAsString(employee))
@@ -177,7 +177,11 @@ public class TestTrainerManagementRestController {
 	@Test
 	public void testViewBySkillPositive() throws Exception {
 		
-		when(service.viewAllTrainers("JAVA")).thenReturn(new ArrayList<Trainer>());
+		Trainer trainer = new Trainer(0,"Rohit","ABcd#456gh",Role.COORDINATOR,null,"JAVA");
+		List<Trainer> trainers = new ArrayList<>();
+		trainers.add(trainer);
+		
+		when(service.viewAllTrainers("JAVA")).thenReturn(trainers);
 		
 		mvc.perform(get("/trainer/viewBySkill?skill=JAVA"))
 				.andExpect(status().isOk());
@@ -197,7 +201,11 @@ public class TestTrainerManagementRestController {
 	@Test
 	public void testViewAllTrainersPositive() throws Exception {
 		
-		when(service.viewAllTrainers()).thenReturn(new ArrayList<Trainer>());
+		Trainer trainer = new Trainer(0,"Rohit","ABcd#456gh",Role.COORDINATOR,null,"JAVA");
+		List<Trainer> trainers = new ArrayList<>();
+		trainers.add(trainer);
+		
+		when(service.viewAllTrainers()).thenReturn(trainers);
 		
 		mvc.perform(get("/trainer/viewAllTrainers"))
 				.andExpect(status().isOk());
@@ -208,7 +216,7 @@ public class TestTrainerManagementRestController {
 		
 		when(service.viewAllTrainers()).thenThrow(ElementNotFoundException.class);
 		
-		mvc.perform(delete("/trainer/viewAllTrainers"))
+		mvc.perform(get("/trainer/viewAllTrainers"))
 				.andExpect(status().isNotFound());
 	}
 }
