@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -59,9 +60,10 @@ public class TestTrainerManagementRestController {
 	@Test
 	public void testAddTrainerNegative() throws Exception {
 		
-		Trainer employee = new Trainer(12,"Rohit","ABcd#456gh",Role.ADMIN,null,"JAVA");
+		Trainer employee = new Trainer(0,"Rohit","ABcd#456gh",Role.ADMIN,null,"JAVA");
 		
-		when(service.addTrainer(employee)).thenThrow(InvalidValueException.class);
+		when(service.addTrainer(Mockito.any(Trainer.class))).thenThrow(InvalidValueException.class);
+		
 		mvc.perform(post("/trainer/add")
 				.accept(MediaType.APPLICATION_JSON) 
 				.content(mapper.writeValueAsString(employee))
@@ -89,7 +91,7 @@ public class TestTrainerManagementRestController {
 		
 		Trainer trainer = new Trainer(0,"Rohit","ABcd#456gh",Role.COORDINATOR,null,"JAVA");
 		
-		when(service.updateTrainer(trainer)).thenThrow(InvalidValueException.class);
+		when(service.updateTrainer(Mockito.any(Trainer.class))).thenThrow(InvalidValueException.class);
 		
 		mvc.perform(put("/trainer/update")
 				.accept(MediaType.APPLICATION_JSON)
@@ -103,7 +105,7 @@ public class TestTrainerManagementRestController {
 		
 		Trainer trainer = new Trainer(14,"Rohit","ABcd#456gh",Role.COORDINATOR,null,"JAVA");
 		
-		when(service.updateTrainer(trainer)).thenThrow(ElementNotFoundException.class);
+		when(service.updateTrainer(Mockito.any(Trainer.class))).thenThrow(ElementNotFoundException.class);
 		
 		mvc.perform(put("/trainer/update")
 				.accept(MediaType.APPLICATION_JSON)
@@ -206,7 +208,7 @@ public class TestTrainerManagementRestController {
 		trainers.add(trainer);
 		
 		when(service.viewAllTrainers()).thenReturn(trainers);
-		
+		 
 		mvc.perform(get("/trainer/viewAllTrainers"))
 				.andExpect(status().isOk());
 	} 
