@@ -60,13 +60,13 @@ public class TestTrainerManagementRestController {
 	@Test
 	public void testAddTrainerNegative() throws Exception {
 		
-		Trainer employee = new Trainer(0,"Rohit","ABcd#456gh",Role.ADMIN,null,"JAVA");
+		Trainer trainer = new Trainer(0,"Rohit","ABcd#456gh",Role.ADMIN,null,"JAVA");
 		
 		when(service.addTrainer(Mockito.any(Trainer.class))).thenThrow(InvalidValueException.class);
 		
 		mvc.perform(post("/trainer/add")
 				.accept(MediaType.APPLICATION_JSON) 
-				.content(mapper.writeValueAsString(employee))
+				.content(mapper.writeValueAsString(trainer))
 				.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isNotAcceptable());
 	}
