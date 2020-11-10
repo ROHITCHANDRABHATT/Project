@@ -20,4 +20,13 @@ public class SwaggerConfig {
 				.paths(PathSelectors.any())
 				.build(); 
 	}
+	
+	@Bean
+	public Docket FeedbackSystemConfigGroupApi() {
+		return new Docket(DocumentationType.SWAGGER_2).groupName("Trainer").select()
+				.apis(RequestHandlerSelectors.any())
+				.paths(PathSelectors.ant("/trainer/**"))
+				.build(); 
+	}
+	
 }

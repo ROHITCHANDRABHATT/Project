@@ -20,7 +20,7 @@ import com.cg.fms.exception.InvalidValueException;
 import com.cg.fms.service.ITrainerManagementService;
 
 @RestController
-//@RequestMapping("/trainer")
+@RequestMapping("/trainer")
 public class TrainerManagementRestController {
 	
 	@Autowired
