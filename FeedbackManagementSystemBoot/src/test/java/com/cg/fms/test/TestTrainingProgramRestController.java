@@ -90,7 +90,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 		public void testUpdateProgramInvalid() throws Exception {
 			
 			Program program = new Program(2,LocalDate.of(2020, Month.APRIL, 11),null,null,null);
-			
 			when(service.updateProgram(Mockito.any(Program.class))).thenThrow(InvalidValueException.class);
 			
 			mvc.perform(put("/update")
