@@ -38,6 +38,20 @@ import javax.persistence.Transient;
 	  @Transient
 		private Trainer faculty;
 
+		
+		public Program() {
+			super();
+		}
+
+		public Program(int programId, LocalDate startDate, LocalDate endDate, Course course, Trainer faculty) {
+			super();
+			this.programId = programId;
+			this.startDate = startDate;
+			this.endDate = endDate;
+			this.course = course;
+			this.faculty = faculty;
+		}
+
 		public int getProgramId() {
 			return programId;
 		}
