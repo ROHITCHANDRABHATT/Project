@@ -24,9 +24,10 @@ public class CourseService implements ICourseService {
 	}
 
 	@Override
-	public void removeCourse(int courseId) throws InvalidValueException {// method to remove course
-		repo.findById(courseId).orElseThrow(() -> new InvalidValueException("Course with id" + courseId + "does not exist"));
-		repo.deleteById(courseId);
+	public Course removeCourse(int courseId) throws InvalidValueException {// method to remove course
+		Course course = repo.findById(courseId).orElseThrow(() -> new InvalidValueException("Enter Valid Course id. Course with id" + courseId + "does not exist"));
+		repo.delete(course);
+		return course;
 		
 	}
 

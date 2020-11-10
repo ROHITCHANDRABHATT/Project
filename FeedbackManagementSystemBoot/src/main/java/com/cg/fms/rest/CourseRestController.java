@@ -32,8 +32,8 @@ public class CourseRestController {
 	
 	// URL: http://localhost:8880/remove?id=
 	@DeleteMapping(value = "/remove")
-	public void removeCourse(@RequestParam("id") int courseId) throws InvalidValueException{
-		service.removeCourse(courseId);
+	public Course removeCourse(@RequestParam("id") int courseId) throws InvalidValueException{
+		return service.removeCourse(courseId);
 	}
 	
 	//// URL: http://localhost:8880/view?id=

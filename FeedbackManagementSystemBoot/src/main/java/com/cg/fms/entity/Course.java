@@ -21,6 +21,21 @@ public class Course {
 	
 	private int noOfDays;
 
+	
+
+	public Course() {
+		super();
+	}
+
+	public Course(int courseId, String courseName, String courseDescription, int noOfDays) {
+		super();
+		this.courseId = courseId;
+		this.courseName = courseName;
+		this.courseDescription = courseDescription;
+		this.noOfDays = noOfDays;
+	}
+
+
 	public int getCourseId() {
 		return courseId;
 	}
