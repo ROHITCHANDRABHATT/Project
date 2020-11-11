@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,12 +18,13 @@ import com.cg.fms.exception.InvalidValueException;
 import com.cg.fms.service.ICourseService;
 
 @RestController//RepresentationalStateTransferController 
+@RequestMapping("/course")
 public class CourseRestController {
 
 	@Autowired
 	private ICourseService service;
 	
-	// URL: http://localhost:8880/add
+	// URL: http://localhost:8880/course/add
 	@PostMapping(value = "/add", consumes = "application/json")
 	public Course addCourse(@RequestBody Course course) throws InvalidValueException {
 		service.addCourse(course);
@@ -30,25 +32,25 @@ public class CourseRestController {
 		
 	}
 	
-	// URL: http://localhost:8880/remove?id=
+	// URL: http://localhost:8880/course/remove?id=
 	@DeleteMapping(value = "/remove")
 	public Course removeCourse(@RequestParam("id") int courseId) throws InvalidValueException{
 		return service.removeCourse(courseId);
 	}
 	
-	//// URL: http://localhost:8880/view?id=
+	//// URL: http://localhost:8880/course/view?id=
 	@GetMapping(value = "/view", produces = "application/json")//It will handle get requests
 	public Course viewCourse(@RequestParam("id") int courseId) throws InvalidValueException {
 		return service.viewCourse(courseId);
 	}
 	
-	//URL: http://localhost:8880/update
+	//URL: http://localhost:8880/course/update
 	@PutMapping(value = "/update", consumes = "application/json")
 	public Course updateCourse(@RequestBody Course course) throws ElementNotFoundException,InvalidValueException {
 		return service.updateCourse(course);
 	}
 	
-	//URL: http://localhost:8880/list
+	//URL: http://localhost:8880/course/list
 	@GetMapping(value = "/list", consumes = "application/json")
 		public List<Course> viewAllCourses() throws ElementNotFoundException{
 			return service.viewAllCourses();

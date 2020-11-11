@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,12 +17,13 @@ import com.cg.fms.service.IParticipantService;
 
 
 @RestController
+@RequestMapping("/participant")
 public class ParticipantRestController {
 
 	@Autowired
 	private IParticipantService service;
 	
-		//URL: http://localhost:8800/enroll?id=123
+		//URL: http://localhost:8880/participant/enroll?id=123
 		@PostMapping(value="/enroll", consumes ="application/json")
 		public Employee enrollParticipant (@RequestBody  Employee emp,  @RequestParam("id") int programId) throws InvalidValueException {
 			
@@ -29,7 +31,7 @@ public class ParticipantRestController {
 			
 		}
 		
-		//URL: http://localhost:8800/List/get?id=123
+		//URL: http://localhost:8800/participant/List/get?id=123
 		@GetMapping(value="/List", produces="application/json")
 		public List<Employee> viewParticipantList(@RequestParam("id") int programId) throws  ElementNotFoundException, InvalidValueException {
 			
