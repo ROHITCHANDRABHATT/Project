@@ -46,7 +46,7 @@ public class TestTrainerManagementRestController {
 	@Test
 	public void testAddTrainerPositive() throws Exception{
 		
-		Trainer trainer = new Trainer(12,"Rohit","ABcd#456gh",Role.COORDINATOR,null,"JAVA");
+		Trainer trainer = new Trainer(12,"Rohit","ABcd#456gh",Role.COORDINATOR,null,"JAVA",2);
 		
 		when(service.addTrainer(trainer)).thenReturn(trainer);
 		
@@ -60,7 +60,7 @@ public class TestTrainerManagementRestController {
 	@Test
 	public void testAddTrainerNegative() throws Exception {
 		
-		Trainer trainer = new Trainer(0,"Rohit","ABcd#456gh",Role.ADMIN,null,"JAVA");
+		Trainer trainer = new Trainer(0,"Rohit","ABcd#456gh",Role.ADMIN,null,"JAVA",2);
 		
 		when(service.addTrainer(Mockito.any(Trainer.class))).thenThrow(InvalidValueException.class);
 		
@@ -75,7 +75,7 @@ public class TestTrainerManagementRestController {
 	@Test
 	public void testUpdateTrainerPositive() throws Exception{
 		
-		Trainer trainer = new Trainer(12,"Rohit","ABcd#456gh",Role.COORDINATOR,null,"JAVA");
+		Trainer trainer = new Trainer(12,"Rohit","ABcd#456gh",Role.COORDINATOR,null,"JAVA",2);
 		
 		when(service.updateTrainer(trainer)).thenReturn(trainer);
 		
@@ -89,7 +89,7 @@ public class TestTrainerManagementRestController {
 	@Test
 	public void testUpdateTrainerInvalid() throws Exception {
 		
-		Trainer trainer = new Trainer(0,"Rohit","ABcd#456gh",Role.COORDINATOR,null,"JAVA");
+		Trainer trainer = new Trainer(0,"Rohit","ABcd#456gh",Role.COORDINATOR,null,"JAVA",2);
 		
 		when(service.updateTrainer(Mockito.any(Trainer.class))).thenThrow(InvalidValueException.class);
 		
@@ -103,7 +103,7 @@ public class TestTrainerManagementRestController {
 	@Test
 	public void testUpdateTrainerNotFound() throws ElementNotFoundException,Exception {
 		
-		Trainer trainer = new Trainer(14,"Rohit","ABcd#456gh",Role.COORDINATOR,null,"JAVA");
+		Trainer trainer = new Trainer(14,"Rohit","ABcd#456gh",Role.COORDINATOR,null,"JAVA",2);
 		
 		when(service.updateTrainer(Mockito.any(Trainer.class))).thenThrow(ElementNotFoundException.class);
 		
@@ -118,7 +118,7 @@ public class TestTrainerManagementRestController {
 	@Test
 	public void testDeleteTrainerPositive() throws Exception {
 
-		Trainer trainer = new Trainer(13,"Rohit","Av3456#hgt",Role.COORDINATOR,null,"JAVA");
+		Trainer trainer = new Trainer(13,"Rohit","Av3456#hgt",Role.COORDINATOR,null,"JAVA",2);
 		
 		when(service.removeTrainer(13)).thenReturn(trainer);
 		
@@ -149,7 +149,7 @@ public class TestTrainerManagementRestController {
 	@Test
 	public void testViewTrainerPositive() throws Exception {
 
-		Trainer trainer = new Trainer(13,"Rohit","Av3456#hgt",Role.COORDINATOR,null,"JAVA");
+		Trainer trainer = new Trainer(13,"Rohit","Av3456#hgt",Role.COORDINATOR,null,"JAVA",2);
 		
 		when(service.viewTrainer(13)).thenReturn(trainer);
 		
@@ -179,7 +179,7 @@ public class TestTrainerManagementRestController {
 	@Test
 	public void testViewBySkillPositive() throws Exception {
 		
-		Trainer trainer = new Trainer(13,"Rohit","ABcd#456gh",Role.COORDINATOR,null,"JAVA");
+		Trainer trainer = new Trainer(13,"Rohit","ABcd#456gh",Role.COORDINATOR,null,"JAVA",2);
 		List<Trainer> trainers = new ArrayList<>();
 		trainers.add(trainer);
 		
@@ -203,7 +203,7 @@ public class TestTrainerManagementRestController {
 	@Test
 	public void testViewAllTrainersPositive() throws Exception {
 		
-		Trainer trainer = new Trainer(13,"Rohit","ABcd#456gh",Role.COORDINATOR,null,"JAVA");
+		Trainer trainer = new Trainer(13,"Rohit","ABcd#456gh",Role.COORDINATOR,null,"JAVA",2);
 		List<Trainer> trainers = new ArrayList<>();
 		trainers.add(trainer);
 		
