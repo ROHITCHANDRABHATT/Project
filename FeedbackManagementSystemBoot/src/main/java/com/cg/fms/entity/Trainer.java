@@ -14,7 +14,6 @@ public class Trainer extends Employee {
 	@Size(max = 15, message = "Skill can't be longer than 15 characters")
 	@Column(length = 15, name = "Skill")
 	private String skill;
-
 	
 	
 	public Trainer() {

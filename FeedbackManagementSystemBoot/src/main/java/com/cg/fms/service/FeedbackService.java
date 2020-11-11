@@ -51,7 +51,7 @@ public class FeedbackService implements IFeedbackService {
 
 	@Override
 	public List<Feedback> viewProgramFeedback(int programid) throws ElementNotFoundException {
-		List<Feedback> fd = repo.findByProgramid(programid);
+		List<Feedback> fd = repo.viewByProgramid(programid);
 		if(fd == null)
 			throw new ElementNotFoundException("Feedback not Found");
 		return fd;

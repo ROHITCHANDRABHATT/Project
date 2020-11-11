@@ -14,6 +14,6 @@ public interface IFeedbackRepository extends JpaRepository<Feedback, Integer> {
 //@Query("FROM Feedback WHERE tarinerid=:trainerid")
 public List<Feedback> findByTrainerid(int trainerid);
 
-@Query("FROM Feedback f WHERE f.program.programid=:programid")
-public List<Feedback> findByProgramid(@Param("programid") int programid);
+@Query("select f FROM Feedback f WHERE f.program.programId=:programid")
+public List<Feedback> viewByProgramid(@Param("programid") int programid);
 }
