@@ -49,7 +49,7 @@ public class TestFeedbackRestController {
 		
 		when(service.addFeedback(fd)).thenReturn(fd);
 		
-		mvc.perform(post("/addFeedback")
+		mvc.perform(post("/feedback/addFeedback")
 				.accept(MediaType.APPLICATION_JSON)
 				.content(mapper.writeValueAsString(fd))
 				.contentType(MediaType.APPLICATION_JSON))
@@ -65,7 +65,7 @@ public class TestFeedbackRestController {
 		
 		when(service.addFeedback(Mockito.any(Feedback.class))).thenThrow(InvalidValueException.class);
 		
-		mvc.perform(post("/addFeedback")
+		mvc.perform(post("/feedback/addFeedback")
 				.accept(MediaType.APPLICATION_JSON)
 				.content(mapper.writeValueAsString(fd))
 				.contentType(MediaType.APPLICATION_JSON))
@@ -86,7 +86,7 @@ public class TestFeedbackRestController {
 		
 		when(service.viewTrainerFeedback(22)).thenReturn(fds);
 		
-		mvc.perform(get("/trainerid?trainerid=22"))
+		mvc.perform(get("/feedback/trainerid?trainerid=22"))
 				.andExpect(status().isOk());
 	} 
 	
@@ -102,7 +102,7 @@ public class TestFeedbackRestController {
 		
 		when(service.viewTrainerFeedback(0)).thenThrow(ElementNotFoundException.class);
 		
-		mvc.perform(get("/trainerid?trainerid=0"))
+		mvc.perform(get("/feedback/trainerid?trainerid=0"))
 				.andExpect(status().isNotFound());
 	}
 
@@ -120,7 +120,7 @@ public class TestFeedbackRestController {
 		
 		when(service.viewProgramFeedback(2)).thenReturn(fds);
 		
-		mvc.perform(get("/programid?programid=2"))
+		mvc.perform(get("/feedback/programid?programid=2"))
 				.andExpect(status().isOk());
 	} 
 	
@@ -135,7 +135,7 @@ public class TestFeedbackRestController {
 		
 		when(service.viewProgramFeedback(0)).thenThrow(ElementNotFoundException.class);
 		
-		mvc.perform(get("/programid?programid=0"))
+		mvc.perform(get("/feedback/programid?programid=0"))
 				.andExpect(status().isNotFound());
 	}
 }

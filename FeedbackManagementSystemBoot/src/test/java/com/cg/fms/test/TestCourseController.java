@@ -44,7 +44,7 @@ public class TestCourseController {
 	public void testAddCourseValidInput() throws Exception{//Test for addCourse() with valid inputs
 		Course course = new Course(10,"Java","Full Stack",45);
 		when(service.addCourse(course)).thenReturn(course);
-		mockMvc.perform(post("/add").accept(MediaType.APPLICATION_JSON)
+		mockMvc.perform(post("/course/add").accept(MediaType.APPLICATION_JSON)
 				.content(mapper.writeValueAsString(course))
 				.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk());
@@ -54,7 +54,7 @@ public class TestCourseController {
 	public void testAddCourseInValidInput() throws Exception{//Test for addCourse() with invalid inputs
 		Course course = new Course(11,null,"Full Stack",0);
 		when(service.addCourse(Mockito.any(Course.class))).thenThrow(InvalidValueException.class);
-		mockMvc.perform(post("/add").accept(MediaType.APPLICATION_JSON)
+		mockMvc.perform(post("/course/add").accept(MediaType.APPLICATION_JSON)
 				.content(mapper.writeValueAsString(course))
 				.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isNotAcceptable());
@@ -64,7 +64,7 @@ public class TestCourseController {
 	public void testUpdateCourseValidInput() throws Exception{//Test for updateCourse() with valid inputs
 		Course course = new Course(10,"Java","Full Stack",45);
 		when(service.updateCourse(course)).thenReturn(course);
-		mockMvc.perform(put("/update").accept(MediaType.APPLICATION_JSON)
+		mockMvc.perform(put("/course/update").accept(MediaType.APPLICATION_JSON)
 				.content(mapper.writeValueAsString(course))
 				.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk());
@@ -74,17 +74,17 @@ public class TestCourseController {
 	public void testUpdateCourseInValidInput() throws Exception{//Test for updateCourse() with invalid inputs
 		Course course = new Course(11,null,"Full Stack",0);
 		when(service.updateCourse(Mockito.any(Course.class))).thenThrow(InvalidValueException.class);
-		mockMvc.perform(put("/update").accept(MediaType.APPLICATION_JSON)
+		mockMvc.perform(put("/course/update").accept(MediaType.APPLICATION_JSON)
 				.content(mapper.writeValueAsString(course))
 				.contentType(MediaType.APPLICATION_JSON))
-				.andExpect(status().isNotAcceptable());
+				.andExpect(status().isNotAcceptable()); 
 	}
 	
 	@Test
 	public void testUpdateCourseInValidInput2() throws Exception{//Test for updateCourse() with invalid inputs
 		Course course = new Course(20,"Java2","Full Stack",45);
 		when(service.updateCourse(Mockito.any(Course.class))).thenThrow(ElementNotFoundException.class);
-		mockMvc.perform(put("/update").accept(MediaType.APPLICATION_JSON)
+		mockMvc.perform(put("/course/update").accept(MediaType.APPLICATION_JSON)
 				.content(mapper.writeValueAsString(course))
 				.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isNotFound());
@@ -94,14 +94,14 @@ public class TestCourseController {
 	public void testRemoveCourseValidInput() throws Exception{//Test for removeCourse() with valid inputs
 		Course course = new Course(20,"Java2","Full Stack",45);
 		when(service.removeCourse(20)).thenReturn(course);
-		mockMvc.perform(delete("/remove?id=20")).andExpect(status().isOk());
+		mockMvc.perform(delete("/course/remove?id=20")).andExpect(status().isOk());
 	
 	}
 	
 	@Test
 	public void testRemoveCourseInValidInput() throws Exception{//Test for removeCourse() with invalid inputs
 		when(service.removeCourse(0)).thenThrow(InvalidValueException.class);
-		mockMvc.perform(delete("/remove?id=0")).andExpect(status().isNotAcceptable());
+		mockMvc.perform(delete("/course/remove?id=0")).andExpect(status().isNotAcceptable());
 	
 	}
 	
@@ -109,14 +109,14 @@ public class TestCourseController {
 	public void testViewCourseValidInput() throws Exception{//Test for viewCourse() with valid inputs
 		Course course = new Course(20,"Java2","Full Stack",45);
 		when(service.viewCourse(20)).thenReturn(course);
-		mockMvc.perform(get("/view?id=20")).andExpect(status().isOk());
+		mockMvc.perform(get("/course/view?id=20")).andExpect(status().isOk());
 	
 	}
 	
 	@Test
 	public void testViewCourseInValidInput() throws Exception{//Test for viewCourse() with invalid inputs
 		when(service.viewCourse(0)).thenThrow(InvalidValueException.class);
-		mockMvc.perform(get("/view?id=0")).andExpect(status().isNotAcceptable());
+		mockMvc.perform(get("/course/view?id=0")).andExpect(status().isNotAcceptable());
 	
 	}
 	
@@ -128,7 +128,7 @@ public class TestCourseController {
 		list.add(course);
 		list.add(course1);
 		when(service.viewAllCourses()).thenReturn(list);
-		mockMvc.perform(get("/list").contentType(MediaType.APPLICATION_JSON))
+		mockMvc.perform(get("/course/list").contentType(MediaType.APPLICATION_JSON))
 		.andExpect(status().isOk());
 	
 	}
@@ -136,7 +136,7 @@ public class TestCourseController {
 	@Test
 	public void testViewAllCoursesInValidInput() throws Exception{//Test for viewAllCourse() with invalid inputs
 		when(service.viewAllCourses()).thenThrow(ElementNotFoundException.class);
-		mockMvc.perform(get("/list").contentType(MediaType.APPLICATION_JSON))
+		mockMvc.perform(get("/course/list").contentType(MediaType.APPLICATION_JSON))
 		.andExpect(status().isNotFound());
 	
 	}

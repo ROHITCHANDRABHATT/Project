@@ -51,7 +51,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 			
 			when(service.createProgram(program)).thenReturn(program);
 			
-			mvc.perform(post("/create")
+			mvc.perform(post("/program/create")
 					.accept(MediaType.APPLICATION_JSON)
 					.content(mapper.writeValueAsString(program))
 					.contentType(MediaType.APPLICATION_JSON))
@@ -65,7 +65,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 			
 			when(service.createProgram(Mockito.any(Program.class))).thenThrow(InvalidValueException.class);
 			
-			mvc.perform(post("/create")
+			mvc.perform(post("/program/create")
 					.accept(MediaType.APPLICATION_JSON) 
 					.content(mapper.writeValueAsString(program))
 					.contentType(MediaType.APPLICATION_JSON))
@@ -79,7 +79,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 			
 			when(service.updateProgram(program)).thenReturn(program);
 			
-			mvc.perform(put("/update")
+			mvc.perform(put("/program/update")
 					.accept(MediaType.APPLICATION_JSON)
 					.content(mapper.writeValueAsString(program))
 					.contentType(MediaType.APPLICATION_JSON))
@@ -92,7 +92,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 			Program program = new Program(2,LocalDate.of(2020, Month.APRIL, 11),null,null,null);
 			when(service.updateProgram(Mockito.any(Program.class))).thenThrow(InvalidValueException.class);
 			
-			mvc.perform(put("/update")
+			mvc.perform(put("/program/update")
 					.accept(MediaType.APPLICATION_JSON)
 					.content(mapper.writeValueAsString(program))
 					.contentType(MediaType.APPLICATION_JSON))
@@ -105,7 +105,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 			
 			when(service.removeProgram(2)).thenReturn(program);
 			
-			mvc.perform(delete("/delete?id=2")).andExpect(status().isOk());
+			mvc.perform(delete("/program/delete?id=2")).andExpect(status().isOk());
 		} 
 		
 		@Test
@@ -123,7 +123,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 			
 			when(service.viewProgram(2)).thenReturn(program);
 			
-			mvc.perform(get("/viewid?id=2"))
+			mvc.perform(get("/program/viewid?id=2"))
 					.andExpect(status().isOk());
 		} 
 		
@@ -132,7 +132,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 			
 			when(service.viewProgram(0)).thenThrow(ElementNotFoundException.class);
 			
-			mvc.perform(get("/viewid?id=0"))
+			mvc.perform(get("/program/viewid?id=0"))
 					.andExpect(status().isNotFound());
 		} 
 		
@@ -148,7 +148,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 		 
 		 when(service.viewAllPrograms()).thenReturn(list);
 		 
-		 mvc.perform(get("/list")).andExpect(status().isOk());
+		 mvc.perform(get("/program/list")).andExpect(status().isOk());
 		 
 		}
 		
@@ -157,7 +157,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 			
 			when(service.viewAllPrograms()).thenThrow(ElementNotFoundException.class);
 			
-			mvc.perform(get("/list")).andExpect(status().isNotFound());
+			mvc.perform(get("/program/list")).andExpect(status().isNotFound());
 		}
 		
 		@Test
@@ -169,7 +169,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 		 
 		 when(service.viewAllProgramsByDate(LocalDate.of(2020, Month.APRIL, 11))).thenReturn(list);
 		 
-		 mvc.perform(get("/listbydate/2016-04-11")).andExpect(status().isOk());
+		 mvc.perform(get("/program/listbydate/2016-04-11")).andExpect(status().isOk());
 		 
 		}
 		
@@ -178,7 +178,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 			
 			when(service.viewAllProgramsByDate(LocalDate.of(2020, Month.AUGUST, 11))).thenThrow(ElementNotFoundException.class);
 			
-			mvc.perform(get("/listbydate"))
+			mvc.perform(get("/program/listbydate"))
 					.andExpect(status().isNotFound());
 		}
 		

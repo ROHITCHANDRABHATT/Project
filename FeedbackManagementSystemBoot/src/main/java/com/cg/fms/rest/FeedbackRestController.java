@@ -37,7 +37,7 @@ public class FeedbackRestController {
 	}
 	// URL: http://localhost:8880/feedback/programid?programid=31
 	@GetMapping(value = "/programid", produces = "application/json")
-	public List<Feedback> viewProgramFeedback(@RequestParam("trainingId") int programid) throws ElementNotFoundException {
+	public List<Feedback> viewProgramFeedback(@RequestParam("programid") int programid) throws ElementNotFoundException {
 		return service.viewProgramFeedback(programid);
 	}
 }

@@ -48,7 +48,7 @@ public class TestParticipantRestController {
 		Employee emp = new Employee(13,"Navneet","navi123#Hker", Role.PARTICIPANT,null);
 		when(service.enrollParticipant(emp,programId)).thenReturn(emp);
 		
-		mvc.perform(post("/enroll?id=123")
+		mvc.perform(post("/participant/enroll?id=123")
 				.accept(MediaType.APPLICATION_JSON)
 				.content(mapper.writeValueAsString(emp))
 				.contentType(MediaType.APPLICATION_JSON))
@@ -64,7 +64,7 @@ public class TestParticipantRestController {
 		Employee emp = new Employee(13,"Navneet","navi123#Hker", Role.PARTICIPANT,null);
 		when(service.enrollParticipant(emp, 12)).thenThrow(InvalidValueException.class);
 		
-		 mvc.perform(post("/enroll?id=12")
+		 mvc.perform(post("/participant/enroll?id=12")
 				.accept(MediaType.APPLICATION_JSON)
 				.content(mapper.writeValueAsString(emp))
 				.contentType(MediaType.APPLICATION_JSON));
@@ -87,7 +87,7 @@ public class TestParticipantRestController {
 		
 		when(service.viewParticipantList(123)).thenReturn(ParticipantsList);
 		
-		mvc.perform(get("/List?id=123"))
+		mvc.perform(get("/participant/List?id=123"))
 				.andExpect(status().isOk());
 	}
 	
@@ -97,8 +97,8 @@ public class TestParticipantRestController {
 	
 		when(service.viewParticipantList(0)).thenThrow(InvalidValueException.class);
 		
-		mvc.perform(get("/List?id=0"))
-		.andExpect(status().isNotFound());
+		mvc.perform(get("/participant/List?id=0"))
+		.andExpect(status().isNotAcceptable());
 	}	
 	
 	

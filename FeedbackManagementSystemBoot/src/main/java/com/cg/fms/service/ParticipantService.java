@@ -24,7 +24,7 @@ public class ParticipantService implements IParticipantService {
 	private ITrainingProgramRepository pro;
 	
 	
-	// validity check for Employee
+	// validity check for Employee 
 		public boolean validityCheck(Employee emp) throws InvalidValueException {
 			if (emp == null)
 				throw new InvalidValueException("Empty Employee Object");
