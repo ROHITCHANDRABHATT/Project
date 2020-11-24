@@ -21,7 +21,7 @@ public class Trainer extends Employee {
 	private int expInYrs;
 	
 	public Trainer() {
-		super();
+		super(); 
 	}
 
 	public Trainer(int employeeId, String empName, String password, Role role, Program program, String skill,int expInYrs) {

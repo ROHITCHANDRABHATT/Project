@@ -45,7 +45,7 @@ public class Employee {
 	@Column(length = 15, name = "Role")
 	private Role role;
 	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "Program_ID")
 	private Program program;
 
