@@ -18,16 +18,16 @@ public class Trainer extends Employee {
 	
 	@Min(value = 1, message = "Experience can't be less than 1 year" )
 	@Column(name = "Experience_Years")
-	private int expInYrs;
+	private int experience;
 	
 	public Trainer() {
 		super(); 
 	}
 
-	public Trainer(int employeeId, String empName, String password, Role role, Program program, String skill,int expInYrs) {
+	public Trainer(int employeeId, String empName, String password, Role role, Program program, String skill,int experience) {
 		super(employeeId, empName, password, role, program);
 		this.skill = skill;
-		this.expInYrs = expInYrs;
+		this.experience = experience;
 	}
 
 	public String getSkill() {
@@ -38,9 +38,9 @@ public class Trainer extends Employee {
 	}
 
 	public int getExpInYrs() {
-		return expInYrs;
+		return experience;
 	}
-	public void setExpInYrs(int expInYrs) {
-		this.expInYrs = expInYrs;
+	public void setExpInYrs(int experience) {
+		this.experience = experience;
 	}
 }

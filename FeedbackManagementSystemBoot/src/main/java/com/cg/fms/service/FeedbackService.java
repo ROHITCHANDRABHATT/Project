@@ -32,16 +32,6 @@ public class FeedbackService implements IFeedbackService {
 	}
 
 	@Override
-	public Feedback updateFeedback(Feedback fd) throws ElementNotFoundException {
-		if(fd == null) {
-			throw new ElementNotFoundException("Feedback not Found");
-		} else {
-			repo.save(fd);
-		}
-		return fd;
-	}
-
-	@Override
 	public List<Feedback> viewTrainerFeedback(int trainerid) throws ElementNotFoundException {
 		List<Feedback> fd = repo.findByTrainerid(trainerid);
 		if(fd == null)

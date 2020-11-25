@@ -11,8 +11,6 @@ public interface IFeedbackService {
 
 public Feedback addFeedback(Feedback fd) throws InvalidValueException;
 
-public Feedback updateFeedback(Feedback fd) throws ElementNotFoundException;
-
 public List<Feedback> viewTrainerFeedback(int trainerid) throws ElementNotFoundException;
 
 public List<Feedback> viewProgramFeedback(int programid) throws ElementNotFoundException;

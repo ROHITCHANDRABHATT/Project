@@ -35,7 +35,6 @@ import javax.persistence.Transient;
 
 		@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 		@JoinColumn(name="faculty_id")
-	  @Transient
 		private Trainer faculty;
 
 		
